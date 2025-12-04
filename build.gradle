@@ -11,14 +11,12 @@ repositories {
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.testng:testng:7.1.0'
     implementation 'com.microsoft.playwright:playwright:1.56.0'
 }
 
 test {
-    useJUnitPlatform()
+    useTestNG()
     finalizedBy jacocoTestReport // Ensure report generation after tests
 }
 

@@ -1,37 +1,40 @@
 package ru.java.mifi.demo;
 
-import com.microsoft.playwright.*;
-import org.junit.jupiter.api.*;
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserContext;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
+import org.testng.annotations.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.testng.Assert.assertEquals;
 
-public class TestPwExample {
+public class TestExample {
     // Shared between all tests in this class.
-    static Playwright playwright;
-    static Browser browser;
+    Playwright playwright;
+    Browser browser;
 
     // New instance for each test method.
     BrowserContext context;
     Page page;
 
-    @BeforeAll
-    static void launchBrowser() {
+    @BeforeClass
+    void launchBrowser() {
         playwright = Playwright.create();
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        browser = playwright.chromium().launch();
     }
 
-    @AfterAll
-    static void closeBrowser() {
+    @AfterClass
+    void closeBrowser() {
         playwright.close();
     }
 
-    @BeforeEach
+    @BeforeMethod
     void createContextAndPage() {
         context = browser.newContext();
         page = context.newPage();
     }
 
-    @AfterEach
+    @AfterMethod
     void closeContext() {
         context.close();
     }
@@ -42,6 +45,6 @@ public class TestPwExample {
         page.locator("input[name=\"search\"]").click();
         page.locator("input[name=\"search\"]").fill("playwright");
         page.locator("input[name=\"search\"]").press("Enter");
-        assertEquals("https://ru.wikipedia.org/w/index.php?go=Go&search=playwright&title=%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:%D0%9F%D0%BE%D0%B8%D1%81%D0%BA&ns0=1", page.url());
+        assertEquals(page.url(), "https://en.wikipedia.org/wiki/Playwright");
     }
 }
