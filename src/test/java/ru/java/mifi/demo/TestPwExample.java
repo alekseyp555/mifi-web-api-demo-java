@@ -47,4 +47,14 @@ public class TestPwExample {
         page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("wikipedia.png")));
         assertEquals("https://ru.wikipedia.org/w/index.php?go=Go&search=playwright&title=%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:%D0%9F%D0%BE%D0%B8%D1%81%D0%BA&ns0=1", page.url());
     }
+
+    @Test
+    void shouldNotSearchWiki() {
+        page.navigate("https://www.wikipedia.org/");
+        page.locator("input[name=\"search\"]").click();
+//        page.locator("input[name=\"search\"]").fill("playwright");
+        page.locator("input[name=\"search\"]").press("Enter");
+        page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("wikipedia2.png")));
+        assertEquals("https://ru.wikipedia.org/w/index.php?title=%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:%D0%9F%D0%BE%D0%B8%D1%81%D0%BA&go=Go&search=", page.url());
+    }
 }
