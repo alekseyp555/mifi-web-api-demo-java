@@ -1,3 +1,5 @@
+//package ru.java.mifi.demo;
+//
 //import org.junit.jupiter.api.Test;
 //import ru.java.mifi.demo.Calculator;
 //
