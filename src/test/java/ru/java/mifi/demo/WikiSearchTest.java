@@ -6,8 +6,8 @@ import org.junit.jupiter.api.*;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byName;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverConditions.url;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class WikiSearchTest {
@@ -29,7 +29,8 @@ public class WikiSearchTest {
                 .pressEnter();          // нажимаем Enter для начала поиска
 
         // проверяем, что заголовок страницы содержит слово "Playwright"
-        $("#firstHeading").shouldHave(text("Playwright"));
+        $("#firstHeading").shouldHave(text("Результаты поиска"));
+        webdriver().shouldHave(url("https://ru.wikipedia.org/w/index.php?go=Go&search=playwright&title=%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:%D0%9F%D0%BE%D0%B8%D1%81%D0%BA&ns0=1"));
     }
 
 //    @AfterEach
