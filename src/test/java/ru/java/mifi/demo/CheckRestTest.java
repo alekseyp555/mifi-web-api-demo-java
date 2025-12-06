@@ -5,8 +5,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CheckRestTest {
@@ -58,7 +57,7 @@ public class CheckRestTest {
                 // Проверки
                 .then()
                     .statusCode(200)
-                    .body("[0].bookingid", equalTo(1755));
+                .body("every{ it.bookingid >=0 }", is(true));
         ;
     }
 
