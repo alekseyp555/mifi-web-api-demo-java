@@ -1,8 +1,8 @@
 package ru.java.mifi.demo;
 
-import static ru.java.mifi.demo.Calculator.add;
-
 public class Main {
     public static void main(String[] args) {
+        int result = Calculator.add(2, 2);
+        System.out.println(result);
     }
 }
