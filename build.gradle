@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id 'io.qameta.allure' version '2.11.2' // Use the latest Allure Gradle plugin version
 }
 
 group = 'ru.java.mifi.demo'
@@ -19,6 +20,7 @@ dependencies {
     // org.seleniumhq.selenium:selenium-java и io.github.bonigarcia:webdrivermanager
 //    testImplementation 'org.seleniumhq.selenium:selenium-java:4.18.1'
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.7.0'
+    testImplementation 'io.qameta.allure:allure-selenide:2.27.0' // Use the latest Allure Selenide adapter
 }
 
 test {
@@ -41,3 +43,10 @@ jacocoTestReport {
     // Customize destination directories if needed
     // reports.html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
 }
+
+allure {
+    report {
+        version = '2.27.0' // Match Allure Selenide adapter version
+    }
+}
+

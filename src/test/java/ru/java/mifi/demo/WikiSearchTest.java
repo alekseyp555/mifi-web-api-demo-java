@@ -2,6 +2,8 @@ package ru.java.mifi.demo;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 
 import static com.codeborne.selenide.Condition.text;
@@ -13,8 +15,20 @@ import static com.codeborne.selenide.WebDriverConditions.url;
 public class WikiSearchTest {
 
     @BeforeAll
+    static void setupAllureReports() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true) // Enable screenshots on failure
+                .savePageSource(true)); // Save page source on failure
+    }
+
+    @BeforeAll
     public void beforeAll() {
         Configuration.browser = "chrome"; // используем браузер Chrome
+    }
+
+    @AfterAll
+    static void tearDownAllureReports() {
+        SelenideLogger.removeListener("AllureSelenide");
     }
 
     @BeforeEach
