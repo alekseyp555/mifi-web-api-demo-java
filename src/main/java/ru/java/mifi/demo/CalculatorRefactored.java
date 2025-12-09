@@ -1,6 +1,6 @@
 //package ru.java.mifi.demo;
 //
-//public class Calculator {
+//public class CalculatorRefactored {
 //
 //    public static int add(int i, int j) {
 //        return i + j;
@@ -15,6 +15,9 @@
 //    }
 //
 //    public static int divide(int i, int j) {
+//        if (j == 0) {
+//            throw new IllegalArgumentException("Нельзя делить на ноль");
+//        }
 //        return i / j;
 //    }
 //}
