@@ -8,10 +8,23 @@ import java.nio.file.Paths;
 
 public class LoginPage {
     private final Page page;
+    private final Locator signUp;
+    private final Locator usernameField;
+    private final Locator passwordField;
+    private final Locator login;
+    private final Locator logout;
+    private final Locator nameOfUser;
+
 
     // Конструктор принимает объект Page
     public LoginPage(Page page) {
         this.page = page;
+        this.signUp = page.locator("#login2");
+        this.usernameField = page.locator("#loginusername");
+        this.passwordField = page.locator("#loginpassword");;
+        this.login = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Log in"));
+        this.logout = page.locator("#logout2");;
+        this.nameOfUser = page.locator("#nameofuser");;
     }
 
     // Метод навигации на главную страницу демоблейза
@@ -19,38 +32,24 @@ public class LoginPage {
         page.navigate("https://www.demoblaze.com/index.html");
     }
 
-    // Элемент "Sign up / Log in" ссылка
-    Locator signUpOrLogInLink() {
-        return page.locator("#login2");
-    }
-
-    // Логин-поле ввода
-    Locator usernameField() {
-        return page.locator("#loginusername");
-    }
-
-    // Пароль-поле ввода
-    Locator passwordField() {
-        return page.locator("#loginpassword");
-    }
-
-    // Кнопка "Log in"
-    Locator logInButton() {
-        return page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Log in"));
-    }
-
-    // Проверочный элемент "Logout" после успешного входа
-    public Locator logoutLink() {
-        return page.locator("#logout2");
+    // Проверочный элемент "login" после успешного входа
+    public void checkLogin(String username) {
+        nameOfUser.getByText(username);
     }
 
     // Метод для заполнения формы и отправки её
     public void performLogin(String username, String password) {
-        signUpOrLogInLink().click(); // Нажатие на ссылку Sign Up / Log In
-        usernameField().fill(username);
-        passwordField().fill(password);
-        logInButton().click();
-        logoutLink().waitFor();      // Ждем появления Logout ссылки
+        signUp.click(); // Нажатие на ссылку Sign Up / Log In
+        usernameField.fill(username);
+        passwordField.fill(password);
+        login.click();
+        logout.waitFor();      // Ждем появления Logout ссылки
+    }
+
+    // Метод для заполнения формы и отправки её
+    public void performLogout() {
+        logout.click();
+        login.waitFor();
     }
 
     // Сделаем скриншот страницы

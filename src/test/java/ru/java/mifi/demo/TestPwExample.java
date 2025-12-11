@@ -45,6 +45,7 @@ public class TestPwExample {
         page.locator("#loginpassword").fill("test");
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Log in")).click();
         page.locator("#logout2").waitFor();
+        page.locator("#nameofuser").getByText("Welcome test");
         page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("demoblaze.png")));
     }
 

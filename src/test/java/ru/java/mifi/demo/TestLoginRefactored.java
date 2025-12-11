@@ -40,7 +40,7 @@ public class TestLoginRefactored {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigateToHomepage();
         loginPage.performLogin("test", "test"); // Выполняем вход
-        assertTrue(loginPage.logoutLink().isVisible()); // Убеждаемся, что появилась ссылка выхода
+        loginPage.checkLogin("test"); // Убеждаемся, что появилось имя пользователя
         loginPage.takeScreenshot("demoblaze.png");
     }
 
@@ -49,8 +49,7 @@ public class TestLoginRefactored {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigateToHomepage();
         loginPage.performLogin("test", "test"); // Выполняем вход
-        page.locator("#logout2").click();
-        page.locator("#login2").waitFor();
+        loginPage.performLogout();
         loginPage.takeScreenshot("demoblaze2.png");
     }
 }
